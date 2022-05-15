@@ -1,7 +1,8 @@
 import React from 'react';
-import './App.css';
 import axios from 'axios';
-import Notification from '../components/Notification';
+import './App.css';
+
+import Notification from './components/Notification';
 
 function App() {
   const [query, setQuery] = React.useState('');
