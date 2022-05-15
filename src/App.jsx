@@ -1,17 +1,41 @@
 import React from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   const [query, setQuery] = React.useState('');
 
   const sendQuery = (e) => {
     e.preventDefault();
+
     if (query.includes(',')) {
-      console.log('query', query);
+      axios
+        .get('/api/sumAndCheck', {
+          params: {
+            numbers: query,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       return;
     }
-    console.log(query);
+    axios
+      .get('/api/checkPrime', {
+        params: {
+          number: query,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
