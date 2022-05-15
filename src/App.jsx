@@ -18,6 +18,12 @@ function App() {
       <section>
         <h2>Input</h2>
 
+        <p>
+          Tip: When querying with multiple integers, separate the numbers with ,. For example:
+          {' '}
+          <code>1,2,3</code>
+        </p>
+
         <input
           type="text"
           value={query}
@@ -28,9 +34,24 @@ function App() {
           type="submit"
           onClick={sendQuery}
         >
-          Check
+          Check with one integer
+        </button>
+
+        <button
+          type="submit"
+          onClick={sendQuery}
+        >
+          Check with multiple integers
         </button>
       </section>
+
+      <footer className="App-footer">
+        <p>
+          (c) 2022 -
+          {' '}
+          <a className="App-link" href="www.github.com/p4nu">Panu Valtanen</a>
+        </p>
+      </footer>
     </div>
   );
 }
