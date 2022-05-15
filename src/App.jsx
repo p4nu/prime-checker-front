@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import Notification from '../components/Notification';
 
 function App() {
   const [query, setQuery] = React.useState('');
+  const [notification, setNotification] = React.useState(null);
 
   const sendQuery = (e) => {
     e.preventDefault();
@@ -16,10 +18,16 @@ function App() {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          setNotification({
+            message: res.data,
+            type: 'success',
+          });
         })
         .catch((err) => {
-          console.log(err);
+          setNotification({
+            message: err,
+            type: 'error',
+          });
         });
 
       return;
@@ -31,10 +39,16 @@ function App() {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        setNotification({
+          message: res.data,
+          type: 'success',
+        });
       })
       .catch((err) => {
-        console.log(err);
+        setNotification({
+          message: err,
+          type: 'error',
+        });
       });
   };
 
@@ -66,6 +80,17 @@ function App() {
           Check
         </button>
       </section>
+
+      {notification && (
+        <section>
+          <h2>Output</h2>
+
+          <Notification
+            message={notification.message}
+            type={notification.type}
+          />
+        </section>
+      )}
 
       <footer className="App-footer">
         <p>
