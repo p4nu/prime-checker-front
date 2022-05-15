@@ -6,6 +6,11 @@ function App() {
 
   const sendQuery = (e) => {
     e.preventDefault();
+    if (query.includes(',')) {
+      console.log('query', query);
+
+      return;
+    }
     console.log(query);
   };
 
@@ -34,14 +39,7 @@ function App() {
           type="submit"
           onClick={sendQuery}
         >
-          Check with one integer
-        </button>
-
-        <button
-          type="submit"
-          onClick={sendQuery}
-        >
-          Check with multiple integers
+          Check
         </button>
       </section>
 
