@@ -49,7 +49,7 @@ function App() {
         <p>
           (c) 2022 -
           {' '}
-          <a className="App-link" href="www.github.com/p4nu">Panu Valtanen</a>
+          <a className="App-link" href="https://www.github.com/p4nu">Panu Valtanen</a>
         </p>
       </footer>
     </div>
