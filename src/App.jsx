@@ -6,7 +6,10 @@ import Notification from './components/Notification';
 
 function App() {
   const [query, setQuery] = React.useState('');
-  const [notification, setNotification] = React.useState(null);
+  const [notification, setNotification] = React.useState({
+    message: '',
+    type: '',
+  });
 
   const sendQuery = (e) => {
     e.preventDefault();
@@ -20,13 +23,13 @@ function App() {
         })
         .then((res) => {
           setNotification({
-            message: res.data,
+            message: `{ result: ${res.data.result}, isPrime: ${res.data.isPrime} }`,
             type: 'success',
           });
         })
         .catch((err) => {
           setNotification({
-            message: err,
+            message: err.toString(),
             type: 'error',
           });
         });
@@ -41,13 +44,13 @@ function App() {
       })
       .then((res) => {
         setNotification({
-          message: res.data,
+          message: `{ isPrime: ${res.data.isPrime} }`,
           type: 'success',
         });
       })
       .catch((err) => {
         setNotification({
-          message: err,
+          message: err.toString(),
           type: 'error',
         });
       });
@@ -82,7 +85,7 @@ function App() {
         </button>
       </section>
 
-      {notification && (
+      {notification.message !== '' && (
         <section>
           <h2>Output</h2>
 
