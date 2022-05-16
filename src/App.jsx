@@ -1,8 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import './App.css';
 
 import Notification from './components/Notification';
+import checkPrime from './services/checkPrime';
+import sumAndCheck from './services/sumAndCheck';
 
 function App() {
   const [query, setQuery] = React.useState('');
@@ -11,49 +12,34 @@ function App() {
     type: '',
   });
 
-  const sendQuery = (e) => {
+  const sendQuery = async (e) => {
     e.preventDefault();
 
-    if (query.includes(',')) {
-      axios
-        .get('/api/sumAndCheck', {
-          params: {
-            numbers: query,
-          },
-        })
-        .then((res) => {
-          setNotification({
-            message: `{ result: ${res.data.result}, isPrime: ${res.data.isPrime} }`,
-            type: 'success',
-          });
-        })
-        .catch((err) => {
-          setNotification({
-            message: err.toString(),
-            type: 'error',
-          });
-        });
+    try {
+      let responseData;
 
-      return;
-    }
-    axios
-      .get('/api/checkPrime', {
-        params: {
-          number: query,
-        },
-      })
-      .then((res) => {
+      if (query.includes(',')) {
+        responseData = await sumAndCheck(query);
+
         setNotification({
-          message: `{ isPrime: ${res.data.isPrime} }`,
+          message: `{ result: ${responseData.result}, isPrime: ${responseData.isPrime} }`,
           type: 'success',
         });
-      })
-      .catch((err) => {
-        setNotification({
-          message: err.toString(),
-          type: 'error',
-        });
+
+        return;
+      }
+      responseData = await checkPrime(query);
+
+      setNotification({
+        message: `{ isPrime: ${responseData.isPrime} }`,
+        type: 'success',
       });
+    } catch (err) {
+      setNotification({
+        message: err.toString(),
+        type: 'error',
+      });
+    }
   };
 
   return (
