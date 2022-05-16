@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './Notification.css';
+
 /**
  * Shows notification
  *
@@ -15,7 +17,7 @@ function Notification({ message, type }) {
   }
 
   return (
-    <div className={`Notification-${type}`}>
+    <div className={`Notification Notification-${type}`}>
       {message}
     </div>
   );

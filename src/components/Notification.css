@@ -1,0 +1,18 @@
+.Notification {
+  display: flex;
+  justify-content: center;
+  margin: 0 25%;
+  padding: 20px;
+}
+
+.Notification-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #1a321a;
+}
+
+.Notification-error {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #5f2e2d;
+}
